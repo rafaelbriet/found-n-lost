@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GhostState { Idle, Searching, Chasing, Attacking }
+public enum GhostState { Idle, Searching, Chasing, Attacking, Dying }
 
 public class Ghost : MonoBehaviour
 {
@@ -14,14 +14,22 @@ public class Ghost : MonoBehaviour
     private Transform target;
     private Transform searchDestination;
     private GhostState currentState;
+    private Character character;
 
     private void Awake()
     {
+        character = GetComponent<Character>();
+
         searchDestination = new GameObject().transform;
     }
 
     private void Update()
     {
+        if (character.CurrentHitPoints < 0)
+        {
+            ChangeState(GhostState.Dying);
+        }
+
         switch (currentState)
         {
             case GhostState.Idle:
@@ -73,6 +81,11 @@ public class Ghost : MonoBehaviour
 
                 ChangeState(GhostState.Chasing);
 
+                break;
+            case GhostState.Dying:
+
+                Destroy(gameObject);
+                
                 break;
             default:
                 break;

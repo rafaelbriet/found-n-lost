@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private Transform cameraHolder;
     [SerializeField]
     private float cameraOffset = 5f;
+    [SerializeField]
+    private Item selectedItem;
 
     private Vector2 direction;
     private Vector2 mousePosition;
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnUseItem()
     {
-        Debug.Log("OnUseItem");
+        selectedItem.Use(new ItemUseOptions { Owner = gameObject, Camera = camera, MousePosition = mousePosition });
     }
 
     private void CameraFollow()
