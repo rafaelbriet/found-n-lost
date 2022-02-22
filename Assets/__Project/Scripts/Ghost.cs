@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GhostState { Idle, Searching, Chasing }
+public enum GhostState { Idle, Searching, Chasing, Attacking }
 
 public class Ghost : MonoBehaviour
 {
@@ -53,6 +53,19 @@ public class Ghost : MonoBehaviour
             case GhostState.Chasing:
                 
                 MoveTo(target);
+
+                if (HasReachedDestination(target))
+                {
+                    ChangeState(GhostState.Attacking);
+                }
+
+                break;
+            case GhostState.Attacking:
+
+                Character character = target.GetComponent<Character>();
+                character.Damage(10);
+
+                ChangeState(GhostState.Chasing);
 
                 break;
             default:
