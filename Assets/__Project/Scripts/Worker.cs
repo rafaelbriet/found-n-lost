@@ -2,38 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WorkerState { Idle, MovingToPackage, PickingUpPackage, MovingToDeliveryPoint, DeliveringPackage, Fleeing }
+public enum WorkerState { Idle, MovingToPackage, PickingUpPackage, MovingToDeliveryPoint, DeliveringPackage, Fleeing, Quitting }
 
 public class Worker : MonoBehaviour
 {
     [SerializeField]
     private float speed = 5f;
+    [SerializeField]
+    private float searchRadius = 3f;
 
     private Transform deliveryPoint;
     private Transform package;
     private Transform fleeSpot;
+    private Transform exit;
     private WorkerState currentState;
-    private float searchRadius = 3f;
+    private Character character;
 
     private void Awake()
     {
+        character = GetComponent<Character>();
+
         ChangeState(WorkerState.Idle);
     }
 
     private void Update()
     {
-        if (currentState != WorkerState.Fleeing && IsGhostNear())
-        {
-            Debug.Log("Check for ghosts");
-            ChangeState(WorkerState.Fleeing);
-        }
-
         switch (currentState)
         {
             case WorkerState.Idle:
 
                 deliveryPoint = GetDeliveryPoint();
                 package = GetPackage();
+
+                if (IsGhostNear())
+                {
+                    ChangeState(WorkerState.Fleeing);
+                }
 
                 if (package != null)
                 {
@@ -44,6 +48,11 @@ public class Worker : MonoBehaviour
             case WorkerState.MovingToPackage:
 
                 MoveTo(package);
+
+                if (IsGhostNear())
+                {
+                    ChangeState(WorkerState.Fleeing);
+                }
 
                 if (HasReachedDestination(package))
                 {
@@ -57,12 +66,22 @@ public class Worker : MonoBehaviour
                 package.position = new Vector3(0, 0, 0);
                 package.localPosition = new Vector3(0, 0.75f, 0);
 
+                if (IsGhostNear())
+                {
+                    ChangeState(WorkerState.Fleeing);
+                }
+
                 ChangeState(WorkerState.MovingToDeliveryPoint);
 
                 break;
             case WorkerState.MovingToDeliveryPoint:
 
                 MoveTo(deliveryPoint);
+
+                if (IsGhostNear())
+                {
+                    ChangeState(WorkerState.Fleeing);
+                }
 
                 if (HasReachedDestination(deliveryPoint))
                 {
@@ -75,11 +94,22 @@ public class Worker : MonoBehaviour
                 Destroy(package.gameObject);
                 package = null;
 
+                if (IsGhostNear())
+                {
+                    ChangeState(WorkerState.Fleeing);
+                }
+
                 ChangeState(WorkerState.Idle);
 
                 break;
             case WorkerState.Fleeing:
-                
+
+                if (character.CurrentHitPoints < 0)
+                {
+                    ChangeState(WorkerState.Quitting);
+                    break;
+                }
+
                 if (fleeSpot == null)
                 {
                     fleeSpot = GetFleeSpot();
@@ -96,6 +126,21 @@ public class Worker : MonoBehaviour
                 if (HasReachedDestination(fleeSpot))
                 {
                     ChangeState(WorkerState.Idle);
+                }
+
+                break;
+            case WorkerState.Quitting:
+
+                if (exit == null)
+                {
+                    exit = GetExit();
+                }
+
+                MoveTo(exit);
+
+                if (HasReachedDestination(exit))
+                {
+                    Destroy(gameObject);
                 }
 
                 break;
@@ -160,5 +205,12 @@ public class Worker : MonoBehaviour
         GameObject package = GameObject.FindGameObjectWithTag("Flee Spot");
 
         return package != null ? package.transform : null;
+    }
+
+    private Transform GetExit()
+    {
+        GameObject exit = GameObject.FindGameObjectWithTag("Exit");
+
+        return exit != null ? exit.transform : null;
     }
 }

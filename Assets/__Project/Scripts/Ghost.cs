@@ -51,7 +51,13 @@ public class Ghost : MonoBehaviour
 
                 break;
             case GhostState.Chasing:
-                
+
+                if (target == null)
+                {
+                    ChangeState(GhostState.Searching);
+                    break;
+                }
+
                 MoveTo(target);
 
                 if (HasReachedDestination(target))
