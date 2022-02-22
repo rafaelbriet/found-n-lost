@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WorkerState { Idle, MovingToPackage, PickingUpPackage, MovingToDeliveryPoint, DeliveringPackage }
+public enum WorkerState { Idle, MovingToPackage, PickingUpPackage, MovingToDeliveryPoint, DeliveringPackage, Fleeing }
 
 public class Worker : MonoBehaviour
 {
@@ -11,7 +11,9 @@ public class Worker : MonoBehaviour
 
     private Transform deliveryPoint;
     private Transform package;
+    private Transform fleeSpot;
     private WorkerState currentState;
+    private float searchRadius = 3f;
 
     private void Awake()
     {
@@ -20,6 +22,12 @@ public class Worker : MonoBehaviour
 
     private void Update()
     {
+        if (currentState != WorkerState.Fleeing && IsGhostNear())
+        {
+            Debug.Log("Check for ghosts");
+            ChangeState(WorkerState.Fleeing);
+        }
+
         switch (currentState)
         {
             case WorkerState.Idle:
@@ -70,9 +78,36 @@ public class Worker : MonoBehaviour
                 ChangeState(WorkerState.Idle);
 
                 break;
+            case WorkerState.Fleeing:
+                
+                if (fleeSpot == null)
+                {
+                    fleeSpot = GetFleeSpot();
+                }
+
+                if (package != null)
+                {
+                    package.SetParent(null);
+                    package = null;
+                }
+
+                MoveTo(fleeSpot);
+
+                if (HasReachedDestination(fleeSpot))
+                {
+                    ChangeState(WorkerState.Idle);
+                }
+
+                break;
             default:
                 break;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, searchRadius);
     }
 
     private void ChangeState(WorkerState state)
@@ -94,6 +129,18 @@ public class Worker : MonoBehaviour
         return distanceToDestination < 0.5f;
     }
 
+    private bool IsGhostNear()
+    {
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, searchRadius, 1 << LayerMask.NameToLayer("Enemy"));
+
+        if (collider != null && collider.CompareTag("Ghost"))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private Transform GetDeliveryPoint()
     {
         GameObject deliveryPoint = GameObject.FindGameObjectWithTag("Delivery Point");
@@ -104,6 +151,13 @@ public class Worker : MonoBehaviour
     private Transform GetPackage()
     {
         GameObject package = GameObject.FindGameObjectWithTag("Package");
+
+        return package != null ? package.transform : null;
+    }
+
+    private Transform GetFleeSpot()
+    {
+        GameObject package = GameObject.FindGameObjectWithTag("Flee Spot");
 
         return package != null ? package.transform : null;
     }

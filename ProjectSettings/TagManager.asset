@@ -7,6 +7,8 @@ TagManager:
   - Delivery Point
   - Package
   - Worker
+  - Ghost
+  - Flee Spot
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
