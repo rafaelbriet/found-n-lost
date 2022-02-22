@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Delivery Point
   - Package
+  - Worker
   layers:
   - Default
   - TransparentFX
