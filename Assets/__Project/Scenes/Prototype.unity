@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 21136564}
   - component: {fileID: 21136563}
   - component: {fileID: 21136565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   camera: {fileID: 519420031}
   cameraHolder: {fileID: 1316516194}
   cameraOffset: 3
-  selectedItem: {fileID: 11400000, guid: 1c9b5e91359b4e84a81cdccb3e8a4c1e, type: 2}
+  selectedItem: {fileID: 11400000, guid: c38ad86b0a7759e41bc0fe642b61dcd0, type: 2}
 --- !u!61 &21136564
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 37935285}
   - component: {fileID: 37935286}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 148735519}
   - component: {fileID: 148735518}
   - component: {fileID: 148735520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Worker
   m_TagString: Worker
   m_Icon: {fileID: 0}
@@ -1035,7 +1035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1221252229}
   - component: {fileID: 1221252230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6142,7 +6142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1920595787
 Transform:
   m_ObjectHideFlags: 0
