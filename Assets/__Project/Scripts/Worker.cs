@@ -34,7 +34,7 @@ public class Worker : MonoBehaviour
                 deliveryPoint = GetDeliveryPoint();
                 package = GetPackage();
 
-                if (IsGhostNear())
+                if (character.HasSprayApplied == false && IsGhostNear())
                 {
                     ChangeState(WorkerState.Fleeing);
                 }
@@ -49,7 +49,7 @@ public class Worker : MonoBehaviour
 
                 MoveTo(package);
 
-                if (IsGhostNear())
+                if (character.HasSprayApplied == false && IsGhostNear())
                 {
                     ChangeState(WorkerState.Fleeing);
                 }
@@ -66,7 +66,7 @@ public class Worker : MonoBehaviour
                 package.position = new Vector3(0, 0, 0);
                 package.localPosition = new Vector3(0, 0.75f, 0);
 
-                if (IsGhostNear())
+                if (character.HasSprayApplied == false && IsGhostNear())
                 {
                     ChangeState(WorkerState.Fleeing);
                 }
@@ -78,7 +78,7 @@ public class Worker : MonoBehaviour
 
                 MoveTo(deliveryPoint);
 
-                if (IsGhostNear())
+                if (character.HasSprayApplied == false && IsGhostNear())
                 {
                     ChangeState(WorkerState.Fleeing);
                 }
@@ -94,7 +94,7 @@ public class Worker : MonoBehaviour
                 Destroy(package.gameObject);
                 package = null;
 
-                if (IsGhostNear())
+                if (character.HasSprayApplied == false && IsGhostNear())
                 {
                     ChangeState(WorkerState.Fleeing);
                 }
