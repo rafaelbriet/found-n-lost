@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GhostState { Idle, Searching, Chasing, Attacking, Dying }
+public enum GhostState { Idle, Searching, Chasing, Attacking, Dying, Fleeing }
 
 public class Ghost : MonoBehaviour
 {
@@ -10,9 +10,12 @@ public class Ghost : MonoBehaviour
     private float speed = 2f;
     [SerializeField]
     private float searchRadius = 2f;
+    [SerializeField]
+    private float fleeDistance = 10f;
 
     private Transform target;
     private Transform searchDestination;
+    private Transform fleeDestination;
     private GhostState currentState;
     private Character character;
 
@@ -47,7 +50,16 @@ public class Ghost : MonoBehaviour
                 if (targetFound != null)
                 {
                     target = targetFound;
-                    ChangeState(GhostState.Chasing);
+                    Character targetCharacter = target.GetComponent<Character>();
+
+                    if (targetCharacter.HasSprayApplied)
+                    {
+                        ChangeState(GhostState.Fleeing);
+                    }
+                    else
+                    {
+                        ChangeState(GhostState.Chasing);
+                    }
                 }
 
                 if (searchDestination == null || HasReachedDestination(searchDestination))
@@ -68,6 +80,12 @@ public class Ghost : MonoBehaviour
 
                 MoveTo(target);
 
+                if (target.GetComponent<Character>().HasSprayApplied)
+                {
+                    ChangeState(GhostState.Fleeing);
+                    break;
+                }
+
                 if (HasReachedDestination(target))
                 {
                     ChangeState(GhostState.Attacking);
@@ -85,7 +103,27 @@ public class Ghost : MonoBehaviour
             case GhostState.Dying:
 
                 Destroy(gameObject);
-                
+
+                break;
+            case GhostState.Fleeing:
+
+                if (fleeDestination == null)
+                {
+                    Transform newFleeDestination = new GameObject().transform;
+                    newFleeDestination.position = (transform.position - target.position) * fleeDistance;
+
+                    fleeDestination = newFleeDestination;
+                }
+
+                MoveTo(fleeDestination);
+
+                if (HasReachedDestination(fleeDestination))
+                {
+                    Destroy(fleeDestination.gameObject);
+                    fleeDestination = null;
+                    ChangeState(GhostState.Searching);
+                }
+
                 break;
             default:
                 break;
