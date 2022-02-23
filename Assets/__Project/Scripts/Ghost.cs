@@ -4,10 +4,8 @@ using UnityEngine;
 
 public enum GhostState { Idle, Searching, Chasing, Attacking, Dying, Fleeing }
 
-public class Ghost : MonoBehaviour
+public class Ghost : NPC
 {
-    [SerializeField]
-    private float speed = 2f;
     [SerializeField]
     private float searchRadius = 2f;
     [SerializeField]
@@ -24,6 +22,8 @@ public class Ghost : MonoBehaviour
         character = GetComponent<Character>();
 
         searchDestination = new GameObject().transform;
+        searchDestination.name = "searchDestination";
+        GetSearchDestination();
     }
 
     private void Update()
@@ -62,7 +62,7 @@ public class Ghost : MonoBehaviour
                     }
                 }
 
-                if (searchDestination == null || HasReachedDestination(searchDestination))
+                if (HasReachedDestination(searchDestination))
                 {
                     GetSearchDestination();
                 }
@@ -141,20 +141,6 @@ public class Ghost : MonoBehaviour
         currentState = state;
     }
 
-    private void MoveTo(Transform destination)
-    {
-        Vector3 directionNormalized = (destination.position - transform.position).normalized;
-
-        transform.Translate(speed * Time.deltaTime * directionNormalized);
-    }
-
-    private bool HasReachedDestination(Transform destination)
-    {
-        float distanceToDestination = Vector3.Distance(transform.position, destination.position);
-
-        return distanceToDestination < 0.5f;
-    }
-
     private Transform GetTarget()
     {
         Collider2D collider = Physics2D.OverlapCircle(transform.position, searchRadius);
@@ -169,6 +155,8 @@ public class Ghost : MonoBehaviour
 
     private void GetSearchDestination()
     {
-        searchDestination.position = Random.insideUnitSphere * 3f;
+        var position = pathfinder.GetRandomPositionInsideNavGraph(transform.position, 1);
+
+        searchDestination.position += position;
     }
 }

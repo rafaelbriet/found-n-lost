@@ -4,10 +4,8 @@ using UnityEngine;
 
 public enum WorkerState { Idle, MovingToPackage, PickingUpPackage, MovingToDeliveryPoint, DeliveringPackage, Fleeing, Quitting }
 
-public class Worker : MonoBehaviour
+public class Worker : NPC
 {
-    [SerializeField]
-    private float speed = 5f;
     [SerializeField]
     private float searchRadius = 3f;
 
@@ -158,20 +156,6 @@ public class Worker : MonoBehaviour
     private void ChangeState(WorkerState state)
     {
         currentState = state;
-    }
-
-    private void MoveTo(Transform destination)
-    {
-        Vector3 directionNormalized = (destination.position - transform.position).normalized;
-
-        transform.Translate(speed * Time.deltaTime * directionNormalized);
-    }
-
-    private bool HasReachedDestination(Transform destination)
-    {
-        float distanceToDestination = Vector3.Distance(transform.position, destination.position);
-
-        return distanceToDestination < 0.5f;
     }
 
     private bool IsGhostNear()

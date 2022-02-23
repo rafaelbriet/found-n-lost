@@ -20,6 +20,16 @@ public class Pathfinder : MonoBehaviour
         return output;
     }
 
+    public Vector3 GetRandomPositionInsideNavGraph(Vector3 origin, int radius)
+    {
+        Node node = navGraph.GetNodeFromWorldPosition(origin);
+        List<Node> nodes = navGraph.GetNeighbors(node);
+
+        int index = Random.Range(0, nodes.Count);
+
+        return nodes[index].Position;
+    }
+
     public List<Node> FindPath(Vector3 start, Vector3 end)
     {
         List<Node> outputPath = new List<Node>();
