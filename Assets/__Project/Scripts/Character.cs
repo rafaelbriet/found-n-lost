@@ -22,6 +22,13 @@ public class Character : MonoBehaviour
         CurrentHitPoints -= amout;
     }
 
+    public void Heal(int amount)
+    {
+        CurrentHitPoints += amount;
+
+        Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
+    }
+
     public void ApplySpray(float duration)
     {
         if (sprayCoroutine != null)
