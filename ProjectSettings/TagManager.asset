@@ -44,8 +44,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Tilemap Background
+  - name: Level Ground
     uniqueID: 3456283651
+    locked: 0
+  - name: Level Wall
+    uniqueID: 2924057981
+    locked: 0
+  - name: Level Decoration
+    uniqueID: 795558349
     locked: 0
   - name: Default
     uniqueID: 0
