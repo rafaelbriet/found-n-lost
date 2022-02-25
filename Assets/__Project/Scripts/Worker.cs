@@ -29,6 +29,8 @@ public class Worker : NPC
         {
             case WorkerState.Idle:
 
+                animator.Play("Base Layer.Worker_Idle_Front");
+
                 deliveryPoint = GetDeliveryPoint();
                 package = GetPackage();
 
@@ -44,6 +46,8 @@ public class Worker : NPC
 
                 break;
             case WorkerState.MovingToPackage:
+
+                DoMoveAnimation("Worker", "Run");
 
                 MoveTo(package);
 
@@ -74,6 +78,8 @@ public class Worker : NPC
                 break;
             case WorkerState.MovingToDeliveryPoint:
 
+                DoMoveAnimation("Worker", "Carrying");
+
                 MoveTo(deliveryPoint);
 
                 if (character.HasSprayApplied == false && IsGhostNear())
@@ -102,6 +108,8 @@ public class Worker : NPC
                 break;
             case WorkerState.Fleeing:
 
+                DoMoveAnimation("Worker", "Fleeing");
+
                 if (character.CurrentHitPoints < 0)
                 {
                     ChangeState(WorkerState.Quitting);
@@ -128,6 +136,8 @@ public class Worker : NPC
 
                 break;
             case WorkerState.Quitting:
+
+                DoMoveAnimation("Worker", "Quitting");
 
                 if (exit == null)
                 {

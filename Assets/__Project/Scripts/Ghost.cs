@@ -37,6 +37,8 @@ public class Ghost : NPC
         {
             case GhostState.Idle:
 
+                animator.Play("Base Layer.Ghost_Idle_Front");
+
                 if (target == null)
                 {
                     ChangeState(GhostState.Searching);
@@ -44,6 +46,8 @@ public class Ghost : NPC
 
                 break;
             case GhostState.Searching:
+
+                DoMoveAnimation("Ghost", "Walk");
 
                 Transform targetFound = GetTarget();
 
@@ -72,6 +76,8 @@ public class Ghost : NPC
                 break;
             case GhostState.Chasing:
 
+                DoMoveAnimation("Ghost", "Chase");
+
                 if (target == null)
                 {
                     ChangeState(GhostState.Searching);
@@ -93,6 +99,8 @@ public class Ghost : NPC
 
                 break;
             case GhostState.Attacking:
+                
+                DoMoveAnimation("Ghost", "Attack");
 
                 Character character = target.GetComponent<Character>();
                 character.Damage(10);
@@ -106,6 +114,8 @@ public class Ghost : NPC
 
                 break;
             case GhostState.Fleeing:
+
+                DoMoveAnimation("Ghost", "Walk");
 
                 if (fleeDestination == null)
                 {

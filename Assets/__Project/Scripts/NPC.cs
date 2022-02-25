@@ -8,6 +8,12 @@ public class NPC : MonoBehaviour
     protected Pathfinder pathfinder;
     [SerializeField]
     protected float speed = 5f;
+    [SerializeField]
+    protected Animator animator;
+    [SerializeField]
+    protected SpriteRenderer spriteRenderer;
+
+    protected Vector3 direction;
 
     private List<Vector3> path = new List<Vector3>();
     private int currentNodeIndex;
@@ -40,7 +46,7 @@ public class NPC : MonoBehaviour
 
         Vector3 currentNode = path[currentNodeIndex];
 
-        Vector3 direction = currentNode - transform.position;
+        direction = currentNode - transform.position;
 
         transform.Translate(speed * Time.deltaTime * direction.normalized);
 
@@ -59,6 +65,32 @@ public class NPC : MonoBehaviour
         float distanceToDestination = Vector3.Distance(transform.position, destination.position);
 
         return distanceToDestination < 0.5f;
+    }
+
+    protected void DoMoveAnimation(string character, string action)
+    {
+        int horizontal = (int)direction.x;
+        int vertical = (int)direction.y;
+
+        if (horizontal > 0)
+        {
+            animator.Play($"Base Layer.{character}_{action}_Side");
+            spriteRenderer.flipX = true;
+        }
+        else if (horizontal < 0)
+        {
+            animator.Play($"Base Layer.{character}_{action}_Side");
+            spriteRenderer.flipX = false;
+        }
+
+        else if (vertical < 0)
+        {
+            animator.Play($"Base Layer.{character}_{action}_Front");
+        }
+        else if (vertical > 0)
+        {
+            animator.Play($"Base Layer.{character}_{action}_Back");
+        }
     }
 
     private void DrawPath()
