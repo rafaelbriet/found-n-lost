@@ -27,10 +27,17 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 direction;
     private Vector2 mousePosition;
+    private new Rigidbody2D rigidbody2D;
 
-    private void Update()
+    private void Awake()
     {
-        transform.Translate(speed * Time.deltaTime * direction);
+        rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 newPosition = (speed * Time.deltaTime * direction) + new Vector2(transform.position.x, transform.position.y);
+        rigidbody2D.MovePosition(newPosition);
 
         if (direction.x > 0)
         {
