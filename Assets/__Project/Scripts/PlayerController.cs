@@ -19,12 +19,41 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Item selectedItem;
 
+    [Header("Animation")]
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     private Vector2 direction;
     private Vector2 mousePosition;
 
     private void Update()
     {
         transform.Translate(speed * Time.deltaTime * direction);
+
+        if (direction.x > 0)
+        {
+            animator.Play("Base Layer.Player_Run_Side");
+            spriteRenderer.flipX = true;
+        }
+        else if (direction.x < 0)
+        {
+            animator.Play("Base Layer.Player_Run_Side");
+            spriteRenderer.flipX = false;
+        }
+        else if (direction.y < 0)
+        {
+            animator.Play("Base Layer.Player_Run_Front");
+        }
+        else if (direction.y > 0)
+        {
+            animator.Play("Base Layer.Player_Run_Back");
+        }
+        else
+        {
+            animator.Play("Base Layer.Player_Idle_Front");
+        }
     }
 
     private void LateUpdate()
