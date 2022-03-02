@@ -54,8 +54,10 @@ public class Ghost : NPC
         debugCanvas.SetActive(showCurrentState);
     }
 
-    private void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
+
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, searchRadius);
 

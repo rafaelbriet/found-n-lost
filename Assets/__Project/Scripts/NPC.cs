@@ -19,7 +19,7 @@ public class NPC : MonoBehaviour
     private int currentNodeIndex;
     private Vector3 lastGoalPosition;
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         DrawPath();
     }
