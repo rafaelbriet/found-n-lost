@@ -74,8 +74,10 @@ public class NPC : MonoBehaviour
 
     protected void DoMoveAnimation(string character, string action)
     {
-        int horizontal = (int)direction.x;
-        int vertical = (int)direction.y;
+        Vector3 directionNormalized = direction.normalized;
+
+        float horizontal = Mathf.Round(directionNormalized.x);
+        float vertical = Mathf.Round(directionNormalized.y);
 
         if (horizontal > 0)
         {
