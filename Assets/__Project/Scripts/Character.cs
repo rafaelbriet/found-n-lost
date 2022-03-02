@@ -26,6 +26,8 @@ public class Character : MonoBehaviour
     {
         CurrentHitPoints -= amout;
 
+        CurrentHitPoints = Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
+
         Damaged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -33,7 +35,7 @@ public class Character : MonoBehaviour
     {
         CurrentHitPoints += amount;
 
-        Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
+        CurrentHitPoints = Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
 
         Healed?.Invoke(this, EventArgs.Empty);
     }
