@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,12 @@ public class Character : MonoBehaviour
 
     private Coroutine sprayCoroutine;
 
+    public int MaxHitPoints => maxHitPoints;
     public int CurrentHitPoints { get; private set; }
     public bool HasSprayApplied { get; private set; }
+
+    public event EventHandler Damaged;
+    public event EventHandler Healed;
 
     private void Awake()
     {
@@ -20,6 +25,8 @@ public class Character : MonoBehaviour
     public void Damage(int amout)
     {
         CurrentHitPoints -= amout;
+
+        Damaged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Heal(int amount)
@@ -27,6 +34,8 @@ public class Character : MonoBehaviour
         CurrentHitPoints += amount;
 
         Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
+
+        Healed?.Invoke(this, EventArgs.Empty);
     }
 
     public void ApplySpray(float duration)
