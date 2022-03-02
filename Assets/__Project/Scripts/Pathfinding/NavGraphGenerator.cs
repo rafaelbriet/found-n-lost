@@ -12,7 +12,7 @@ public class NavGraphGenerator : MonoBehaviour
 
     private Dictionary<Vector3, Node> nodes = new Dictionary<Vector3, Node>();
 
-    private void Start()
+    private void Awake()
     {
         Generate();
     }
@@ -98,13 +98,13 @@ public class NavGraphGenerator : MonoBehaviour
         return output;
     }
 
-    public List<Node> GetNeighbors(Node node)
+    public List<Node> GetNeighbors(Node node, int radius = 1)
     {
         List<Node> neighbors = new List<Node>();
 
-        for (int x = -1; x < 1; x++)
+        for (int x = -radius; x < radius; x++)
         {
-            for (int y = -1; y < 1; y++)
+            for (int y = -radius; y < radius; y++)
             {
                 if (x == 0 && y == 0)
                 {

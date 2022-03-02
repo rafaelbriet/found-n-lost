@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
@@ -23,11 +24,32 @@ public class Pathfinder : MonoBehaviour
     public Vector3 GetRandomPositionInsideNavGraph(Vector3 origin, int radius)
     {
         Node node = navGraph.GetNodeFromWorldPosition(origin);
-        List<Node> nodes = navGraph.GetNeighbors(node);
+        List<Node> nodes = navGraph.GetNeighbors(node, radius);
+        List<Node> resultNodes = nodes.FindAll(n => n.IsWalkable);
+        int index = Random.Range(0, resultNodes.Count);
 
-        int index = Random.Range(0, nodes.Count);
+        return resultNodes[index].Position;
+    }
 
-        return nodes[index].Position;
+    public Vector3 GetPositionInsideNavGraph(Vector3 start, Vector3 direction, int lenght)
+    {
+        List<Node> nodes = new List<Node>();
+
+        while (lenght > 0)
+        {
+            Node node = navGraph.GetNodeFromWorldPosition(start);
+
+            if (node != null && node.IsWalkable)
+            {
+                nodes.Add(node);
+            }
+
+            start += direction.normalized;
+
+            lenght--;
+        }
+        
+        return nodes[nodes.Count - 1].Position;
     }
 
     public List<Node> FindPath(Vector3 start, Vector3 end)

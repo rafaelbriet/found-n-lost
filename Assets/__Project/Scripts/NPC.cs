@@ -28,6 +28,11 @@ public class NPC : MonoBehaviour
     {
         Vector3 goalPosition = destination.position;
 
+        MoveTo(goalPosition);
+    }
+
+    protected void MoveTo(Vector3 goalPosition)
+    {
         bool hasGoalChanged = goalPosition != lastGoalPosition;
 
         if (currentNodeIndex == path.Count || hasGoalChanged)
