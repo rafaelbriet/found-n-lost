@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WarehouseManager : MonoBehaviour
 {
@@ -20,9 +22,12 @@ public class WarehouseManager : MonoBehaviour
     private GameObject[] ghostSpawnPoints;
     private Timer ghostSpawnTimer;
     private List<GameObject> ghosts = new List<GameObject>();
-    private int currentNight;
 
     public Timer Timer { get; private set; }
+    public int CurrentNight { get; private set; }
+
+    public event EventHandler NightStarted;
+    public event EventHandler NightEnded;
 
     private void Awake()
     {
@@ -45,21 +50,26 @@ public class WarehouseManager : MonoBehaviour
         GameOver();
     }
 
-    private void StartNight()
+    public void StartNight()
     {
         Debug.Log("Another night of work has begun...");
 
-        currentNight++;
+        CurrentNight++;
 
         SpawnGhost();
 
+        Timer.Reset();
+        ghostSpawnTimer.Reset();
+
         StartCoroutine(GhostTimer());
         StartCoroutine(GameTimer());
+
+        NightStarted?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameOver()
     {
-        Debug.Log($"After fight so many ghosts for {currentNight} nights, you decided to quit this job...");
+        Debug.Log($"After fight so many ghosts for {CurrentNight} nights, you decided to quit this job...");
 
         Destroy(player);
     }
@@ -85,9 +95,11 @@ public class WarehouseManager : MonoBehaviour
 
     private void EndNight()
     {
-        Debug.Log($"Another night of work is over. You're working for {currentNight} nights...");
+        Debug.Log($"Another night of work is over. You're working for {CurrentNight} nights...");
 
         RemoveAllGhosts();
+
+        NightEnded?.Invoke(this, EventArgs.Empty);
     }
     private GameObject GetRandomGhostSpawnPoint()
     {
