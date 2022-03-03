@@ -244,6 +244,11 @@ public class Ghost : NPC
 
     private bool IsInAttackRange()
     {
+        if (target == null)
+        {
+            return false;
+        }
+
         float distanceToDestination = Vector3.Distance(transform.position, target.transform.position);
 
         return distanceToDestination < attackRange;
