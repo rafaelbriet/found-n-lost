@@ -44,7 +44,7 @@ public class Ghost : NPC
 
     private void Update()
     {
-        if (character.CurrentHitPoints < 0)
+        if (character.CurrentHitPoints <= 0)
         {
             ChangeState(GhostState.Dying);
         }
