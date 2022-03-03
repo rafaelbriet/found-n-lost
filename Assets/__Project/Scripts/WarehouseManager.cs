@@ -17,6 +17,7 @@ public class WarehouseManager : MonoBehaviour
 
     private GameObject[] ghostSpawnPoints;
     private Timer ghostSpawnTimer;
+    private List<GameObject> ghosts = new List<GameObject>();
 
     public Timer Timer { get; private set; }
 
@@ -47,10 +48,28 @@ public class WarehouseManager : MonoBehaviour
     private void SpawnGhost()
     {
         GameObject ghostGO = Instantiate(ghostPrefab, GetRandomGhostSpawnPoint().transform.position, Quaternion.identity);
+        ghosts.Add(ghostGO);
+
         NPC ghostNPC = ghostGO.GetComponent<NPC>();
         ghostNPC.Init(pathfinder);
     }
 
+    private void RemoveAllGhosts()
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            Destroy(ghost);
+        }
+
+        ghosts.Clear();
+    }
+
+    private void EndNight()
+    {
+        Debug.Log("Another night of work is over...");
+
+        RemoveAllGhosts();
+    }
     private GameObject GetRandomGhostSpawnPoint()
     {
         int index = Random.Range(0, ghostSpawnPoints.Length);
@@ -65,7 +84,7 @@ public class WarehouseManager : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Another night of work is over...");
+        EndNight();
     }
 
     private IEnumerator GhostTimer()
@@ -74,6 +93,11 @@ public class WarehouseManager : MonoBehaviour
         {
             while (ghostSpawnTimer.HasFinished == false)
             {
+                if (Timer.HasFinished)
+                {
+                    break;
+                }
+
                 ghostSpawnTimer.Tick(Time.deltaTime);
                 yield return null;
             }
