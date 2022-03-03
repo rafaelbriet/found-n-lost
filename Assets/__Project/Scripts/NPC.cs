@@ -24,6 +24,11 @@ public class NPC : MonoBehaviour
         DrawPath();
     }
 
+    public void Init(Pathfinder pathfinder)
+    {
+        this.pathfinder = pathfinder;
+    }
+
     protected void MoveTo(Transform destination)
     {
         Vector3 goalPosition = destination.position;
