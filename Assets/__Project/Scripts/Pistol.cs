@@ -21,7 +21,6 @@ public class Pistol : Item
 
         if (hit.collider != null)
         {
-            Debug.Log(hit.collider.name);
             Character character = hit.collider.GetComponent<Character>();
             character.Damage(damageAmount);
         }
