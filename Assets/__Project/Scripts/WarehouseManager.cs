@@ -20,6 +20,7 @@ public class WarehouseManager : MonoBehaviour
     private GameObject[] ghostSpawnPoints;
     private Timer ghostSpawnTimer;
     private List<GameObject> ghosts = new List<GameObject>();
+    private int currentNight;
 
     public Timer Timer { get; private set; }
 
@@ -47,7 +48,9 @@ public class WarehouseManager : MonoBehaviour
     private void StartNight()
     {
         Debug.Log("Another night of work has begun...");
-        
+
+        currentNight++;
+
         SpawnGhost();
 
         StartCoroutine(GhostTimer());
@@ -56,7 +59,7 @@ public class WarehouseManager : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("After fight so many ghosts you decided to quit this job...");
+        Debug.Log($"After fight so many ghosts for {currentNight} nights, you decided to quit this job...");
 
         Destroy(player);
     }
@@ -82,7 +85,7 @@ public class WarehouseManager : MonoBehaviour
 
     private void EndNight()
     {
-        Debug.Log("Another night of work is over...");
+        Debug.Log($"Another night of work is over. You're working for {currentNight} nights...");
 
         RemoveAllGhosts();
     }
