@@ -24,6 +24,7 @@
     public void Reset()
     {
         timeLeft = duration;
+        HasFinished = false;
     }
 
     public string PrintTimeLeftInMinutes()
