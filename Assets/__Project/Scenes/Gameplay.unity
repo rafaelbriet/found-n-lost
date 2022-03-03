@@ -5438,7 +5438,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7684541935217448079, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
   m_PrefabInstance: {fileID: 394758626}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2032695713}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee77e664549b6d43b9dbd0e136d34ec, type: 3}
@@ -5573,6 +5573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nightDuration: 30
+  player: {fileID: 2032695713}
   ghostPrefab: {fileID: 8189913463890121813, guid: b0cb4e1a9dcb97740b7e798be6ab16e3, type: 3}
   timeBetweenGhostSpawn: 10
   pathfinder: {fileID: 14916467}
@@ -12660,6 +12661,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1384803433741141577, guid: d2e8f72ecc99ffa45bcd7bf73c52fefc, type: 3}
   m_PrefabInstance: {fileID: 2031223587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2032695713 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7684541935217448074, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
+  m_PrefabInstance: {fileID: 394758626}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2036638694
 PrefabInstance:

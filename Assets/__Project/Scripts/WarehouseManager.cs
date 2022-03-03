@@ -8,6 +8,8 @@ public class WarehouseManager : MonoBehaviour
     [Tooltip("How long a night lasts in seconds.")]
     private float nightDuration = 30f;
     [SerializeField]
+    private GameObject player;
+    [SerializeField]
     private GameObject ghostPrefab;
     [SerializeField]
     [Tooltip("How long takes to a ghost to spawn in seconds.")]
@@ -28,11 +30,18 @@ public class WarehouseManager : MonoBehaviour
         ghostSpawnTimer = new Timer(timeBetweenGhostSpawn);
 
         Timer = new Timer(nightDuration);
+
+        player.GetComponent<Character>().Died += OnPlayerDied;
     }
 
     private void Start()
     {
         StartNight();
+    }
+
+    private void OnPlayerDied(object sender, System.EventArgs e)
+    {
+        GameOver();
     }
 
     private void StartNight()
@@ -43,6 +52,13 @@ public class WarehouseManager : MonoBehaviour
 
         StartCoroutine(GhostTimer());
         StartCoroutine(GameTimer());
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("After fight so many ghosts you decided to quit this job...");
+
+        Destroy(player);
     }
 
     private void SpawnGhost()

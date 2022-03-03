@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
 
     public event EventHandler Damaged;
     public event EventHandler Healed;
+    public event EventHandler Died;
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class Character : MonoBehaviour
         CurrentHitPoints = Mathf.Clamp(CurrentHitPoints, 0, maxHitPoints);
 
         Damaged?.Invoke(this, EventArgs.Empty);
+
+        if (CurrentHitPoints <= 0)
+        {
+            Died?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void Heal(int amount)
