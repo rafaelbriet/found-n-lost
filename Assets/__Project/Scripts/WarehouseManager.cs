@@ -10,6 +10,9 @@ public class WarehouseManager : MonoBehaviour
     [Tooltip("How long a night lasts in seconds.")]
     private float nightDuration = 30f;
     [SerializeField]
+    [Tooltip("How much time will be added to the night duration as nights go by. Time in seconds")]
+    private float nightDurationIncreasesBy = 10f;
+    [SerializeField]
     private GameObject player;
     [SerializeField]
     private GameObject ghostPrefab;
@@ -62,13 +65,13 @@ public class WarehouseManager : MonoBehaviour
 
         SpawnGhost();
 
-        Timer.Reset();
-
         if (CurrentNight > 1)
         {
+            Timer.SetDuration(CalculateNightDuration());
             ghostSpawnTimer.SetDuration(CalculateTimeBetweenGhostSpawn());
         }
 
+        Timer.Reset();
         ghostSpawnTimer.Reset();
 
         player.SetActive(true);
@@ -78,6 +81,11 @@ public class WarehouseManager : MonoBehaviour
         StartCoroutine(GameTimer());
 
         NightStarted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private float CalculateNightDuration()
+    {
+        return nightDuration + (nightDurationIncreasesBy * (CurrentNight - 1));
     }
 
     private float CalculateTimeBetweenGhostSpawn()
