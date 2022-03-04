@@ -27,6 +27,11 @@
         HasFinished = false;
     }
 
+    public void SetDuration(float duration)
+    {
+        this.duration = duration;
+    }
+
     public string PrintTimeLeftInMinutes()
     {
         float minutes = timeLeft / 60f;

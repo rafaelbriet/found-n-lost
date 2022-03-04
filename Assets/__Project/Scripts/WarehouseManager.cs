@@ -14,8 +14,14 @@ public class WarehouseManager : MonoBehaviour
     [SerializeField]
     private GameObject ghostPrefab;
     [SerializeField]
-    [Tooltip("How long takes to a ghost to spawn in seconds.")]
-    private float timeBetweenGhostSpawn = 10f;
+    [Tooltip("The maximum time a ghost will take to spawn. Time in seconds.")]
+    private float maxTimeBetweenGhostSpawn = 10f;
+    [SerializeField]
+    [Tooltip("The minimum time a ghost will take to spawn. Time in seconds.")]
+    private float minTimeBetweenGhostSpawn = 5f;
+    [SerializeField]
+    [Tooltip("How much the time between ghost spawn decreases as nights pass. Time in seconds.")]
+    private float timeBetweenGhostSpawnDecreasesBy = 1f;
     [SerializeField]
     private Pathfinder pathfinder;
 
@@ -35,7 +41,7 @@ public class WarehouseManager : MonoBehaviour
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("Player Spawn");
         ghostSpawnPoints = GameObject.FindGameObjectsWithTag("Ghost Spawn");
 
-        ghostSpawnTimer = new Timer(timeBetweenGhostSpawn);
+        ghostSpawnTimer = new Timer(maxTimeBetweenGhostSpawn);
 
         Timer = new Timer(nightDuration);
 
@@ -57,6 +63,12 @@ public class WarehouseManager : MonoBehaviour
         SpawnGhost();
 
         Timer.Reset();
+
+        if (CurrentNight > 1)
+        {
+            ghostSpawnTimer.SetDuration(CalculateTimeBetweenGhostSpawn());
+        }
+
         ghostSpawnTimer.Reset();
 
         player.SetActive(true);
@@ -66,6 +78,13 @@ public class WarehouseManager : MonoBehaviour
         StartCoroutine(GameTimer());
 
         NightStarted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private float CalculateTimeBetweenGhostSpawn()
+    {
+        float time = maxTimeBetweenGhostSpawn - (timeBetweenGhostSpawnDecreasesBy * CurrentNight);
+
+        return Mathf.Clamp(time, minTimeBetweenGhostSpawn, maxTimeBetweenGhostSpawn);
     }
 
     private void GameOver()
