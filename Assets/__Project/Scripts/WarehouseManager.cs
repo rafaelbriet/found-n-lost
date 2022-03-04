@@ -99,8 +99,14 @@ public class WarehouseManager : MonoBehaviour
         GameObject ghostGO = Instantiate(ghostPrefab, GetRandomGhostSpawnPoint().transform.position, Quaternion.identity);
         ghosts.Add(ghostGO);
 
-        NPC ghostNPC = ghostGO.GetComponent<NPC>();
-        ghostNPC.Init(pathfinder);
+        Ghost ghost = ghostGO.GetComponent<Ghost>();
+        ghost.Init(pathfinder);
+
+        if (CurrentNight > 1)
+        {
+            ghost.IncreaseSearchRadius(CurrentNight - 1);
+            ghost.IncreaseAttackDamage(CurrentNight - 1);
+        }
     }
 
     private void RemoveAllGhosts()

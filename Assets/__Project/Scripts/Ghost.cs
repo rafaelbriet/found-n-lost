@@ -13,7 +13,13 @@ public class Ghost : NPC
     [SerializeField]
     private float attackCooldown = 2f;
     [SerializeField]
-    private float searchRadius = 2f;
+    private float minSearchRadius = 2f;
+    [SerializeField]
+    private float maxSearchRadius = 10f;
+    [SerializeField]
+    private int minAttack = 10;
+    [SerializeField]
+    private int maxAttack = 20;
     [SerializeField]
     private int fleeDistance = 5;
     [SerializeField]
@@ -33,11 +39,16 @@ public class Ghost : NPC
     private Vector3 destination;
     private bool canAttack = true;
     private new Collider2D collider2D;
+    private float currentSearchRadius;
+    private int currentAttack;
 
     private void Awake()
     {
         character = GetComponent<Character>();
         collider2D = GetComponent<Collider2D>();
+
+        currentAttack = minAttack;
+        currentSearchRadius = minSearchRadius;
 
         UpdateStateDebugText();
     }
@@ -59,10 +70,20 @@ public class Ghost : NPC
         base.OnDrawGizmos();
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
+        Gizmos.DrawWireSphere(transform.position, currentSearchRadius);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    public void IncreaseSearchRadius(float amount)
+    {
+        currentSearchRadius = Mathf.Clamp(currentSearchRadius + amount, minSearchRadius, maxSearchRadius);
+    }
+
+    public void IncreaseAttackDamage(int amount)
+    {
+        currentAttack = Mathf.Clamp(currentAttack + amount, minAttack, maxAttack);
     }
 
     private void UpdateState()
@@ -136,7 +157,7 @@ public class Ghost : NPC
     {
         if (canAttack && IsInAttackRange())
         {
-            target.Damage(10);
+            target.Damage(currentAttack);
             StartCoroutine(AttackCooldownCoroutine());
         }
     }
@@ -256,7 +277,7 @@ public class Ghost : NPC
 
     private bool HasFoundCharacter(out Character character)
     {
-        Collider2D collider = Physics2D.OverlapCircle(transform.position, searchRadius, layerMask);
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, currentSearchRadius, layerMask);
 
         if (collider != null)
         {
@@ -270,7 +291,7 @@ public class Ghost : NPC
 
     private void GetSearchDestination()
     {
-        destination = pathfinder.GetRandomPositionInsideNavGraph(transform.position, (int)searchRadius);
+        destination = pathfinder.GetRandomPositionInsideNavGraph(transform.position, (int)currentSearchRadius);
     }
 
     private void GetFleeDestination()
