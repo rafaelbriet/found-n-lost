@@ -22,6 +22,7 @@ public class WarehouseCanvasManager : MonoBehaviour
     private void Awake()
     {
         HideCanvasGroup(endOfTheNightCanvasGroup);
+        ShowCanvasGroup(startOfTheNightCanvasGroup);
         StartCoroutine(StartOfTheNightIntroCoroutine());
     }
 
@@ -70,6 +71,11 @@ public class WarehouseCanvasManager : MonoBehaviour
 
     private void ShowCanvasGroup(CanvasGroup canvasGroup)
     {
+        if (canvasGroup.gameObject.activeInHierarchy == false)
+        {
+            canvasGroup.gameObject.SetActive(true);
+        }
+
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
