@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
     private Transform cameraHolder;
     [SerializeField]
     private float cameraOffset = 5f;
-    [SerializeField]
-    private Item selectedItem;
 
     [Header("Animation")]
     [SerializeField]
@@ -28,10 +26,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 direction;
     private Vector2 mousePosition;
     private new Rigidbody2D rigidbody2D;
+    private Inventory inventory;
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        inventory = GetComponent<Inventory>();
     }
 
     private void FixedUpdate()
@@ -85,7 +85,18 @@ public class PlayerController : MonoBehaviour
 
     public void OnUseItem()
     {
-        selectedItem.Use(new ItemUseOptions { Owner = gameObject, Camera = camera, MousePosition = mousePosition });
+        if (inventory.SelectedItem == null)
+        {
+            return;
+        }
+
+        inventory.SelectedItem.Use(new ItemUseOptions { Owner = gameObject, Camera = camera, MousePosition = mousePosition });
+    }
+
+    public void OnSelectItem(InputValue value)
+    {
+        int index = (int)value.Get<float>() - 1;
+        inventory.SelectItem(index);
     }
 
     private void CameraFollow()
