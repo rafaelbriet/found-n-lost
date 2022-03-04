@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnReload()
     {
-        Debug.Log("OnReload");
+        
     }
 
     public void OnUseItem()

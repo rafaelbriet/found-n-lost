@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4def63424f249b34ebd7417113dc8baa, type: 3}
   m_Name: AntiGhostSpray
   m_EditorClassIdentifier: 
+  icon: {fileID: -8498594525677467540, guid: fb40c262a2e791c4797b4fd5b72c0594, type: 3}
+  durationInSeconds: 15
   range: 5
+  areaOfEffect: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 384

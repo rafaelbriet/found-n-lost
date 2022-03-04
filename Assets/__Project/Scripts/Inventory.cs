@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class Inventory : MonoBehaviour
     private List<Item> items;
 
     public Item SelectedItem { get; private set; }
+    public int SelectedItemIndex { get; private set; }
+    public IReadOnlyCollection<Item> Items { get => items.AsReadOnly(); }
+
+    public event EventHandler SelectedItemChanged;
 
     public void SelectItem(int index)
     {
@@ -17,5 +22,8 @@ public class Inventory : MonoBehaviour
         }
 
         SelectedItem = items[index];
+        SelectedItemIndex = index;
+
+        SelectedItemChanged?.Invoke(this, EventArgs.Empty);
     }
 }
