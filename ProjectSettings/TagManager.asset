@@ -10,6 +10,7 @@ TagManager:
   - Ghost
   - Flee Spot
   - Exit
+  - Player Spawn
   - Ghost Spawn
   layers:
   - Default

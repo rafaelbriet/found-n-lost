@@ -19,6 +19,7 @@ public class WarehouseManager : MonoBehaviour
     [SerializeField]
     private Pathfinder pathfinder;
 
+    private GameObject[] playerSpawnPoints;
     private GameObject[] ghostSpawnPoints;
     private Timer ghostSpawnTimer;
     private List<GameObject> ghosts = new List<GameObject>();
@@ -31,6 +32,7 @@ public class WarehouseManager : MonoBehaviour
 
     private void Awake()
     {
+        playerSpawnPoints = GameObject.FindGameObjectsWithTag("Player Spawn");
         ghostSpawnPoints = GameObject.FindGameObjectsWithTag("Ghost Spawn");
 
         ghostSpawnTimer = new Timer(timeBetweenGhostSpawn);
@@ -38,6 +40,7 @@ public class WarehouseManager : MonoBehaviour
         Timer = new Timer(nightDuration);
 
         player.GetComponent<Character>().Died += OnPlayerDied;
+        player.SetActive(false);
     }
 
     private void OnPlayerDied(object sender, System.EventArgs e)
@@ -55,6 +58,9 @@ public class WarehouseManager : MonoBehaviour
 
         Timer.Reset();
         ghostSpawnTimer.Reset();
+
+        player.SetActive(true);
+        SetPlayerPosition();
 
         StartCoroutine(GhostTimer());
         StartCoroutine(GameTimer());
@@ -95,7 +101,21 @@ public class WarehouseManager : MonoBehaviour
         RemoveAllGhosts();
 
         NightEnded?.Invoke(this, EventArgs.Empty);
+
+        player.SetActive(false);
     }
+
+    private void SetPlayerPosition()
+    {
+        player.transform.position = GetRandomPlayerSpawnPoint().transform.position;
+    }
+
+    private GameObject GetRandomPlayerSpawnPoint()
+    {
+        int index = Random.Range(0, playerSpawnPoints.Length);
+        return playerSpawnPoints[index];
+    }
+
     private GameObject GetRandomGhostSpawnPoint()
     {
         int index = Random.Range(0, ghostSpawnPoints.Length);
