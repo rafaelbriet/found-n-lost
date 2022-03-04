@@ -40,11 +40,6 @@ public class WarehouseManager : MonoBehaviour
         player.GetComponent<Character>().Died += OnPlayerDied;
     }
 
-    private void Start()
-    {
-        StartNight();
-    }
-
     private void OnPlayerDied(object sender, System.EventArgs e)
     {
         GameOver();
