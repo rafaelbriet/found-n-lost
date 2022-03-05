@@ -36,6 +36,6 @@
         float minutes = TimeLeft / 60f;
         float seconds = TimeLeft % 60f;
 
-        return $"{(int)minutes:00}:{seconds:00}";
+        return $"{(int)minutes:00}:{(int)seconds:00}";
     }
 }
