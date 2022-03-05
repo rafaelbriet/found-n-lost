@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSpray", menuName = "Itens/Spray")]
-public class Spray : Item
+public class SprayScriptableObject : ItemScriptableObject
 {
     [SerializeField]
     private float durationInSeconds = 15f;

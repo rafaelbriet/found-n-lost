@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPistol", menuName = "Itens/Pistol")]
-public class Pistol : Item
+public class PistolScriptableObject : ItemScriptableObject
 {
     [SerializeField]
     private int damageAmount = 10;

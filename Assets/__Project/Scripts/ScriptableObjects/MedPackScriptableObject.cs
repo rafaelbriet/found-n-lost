@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMedPack", menuName = "Itens/Med Pack")]
-public class MedPack : Item
+public class MedPackScriptableObject : ItemScriptableObject
 {
     [SerializeField]
     private int healAmount = 10;

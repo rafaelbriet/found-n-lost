@@ -6,11 +6,11 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
-    private List<Item> items;
+    private List<ItemScriptableObject> items;
 
-    public Item SelectedItem { get; private set; }
+    public ItemScriptableObject SelectedItem { get; private set; }
     public int SelectedItemIndex { get; private set; }
-    public IReadOnlyCollection<Item> Items { get => items.AsReadOnly(); }
+    public IReadOnlyCollection<ItemScriptableObject> Items { get => items.AsReadOnly(); }
 
     public event EventHandler SelectedItemChanged;
 
