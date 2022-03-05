@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AntiGhostSpray
   m_EditorClassIdentifier: 
   icon: {fileID: -8498594525677467540, guid: fb40c262a2e791c4797b4fd5b72c0594, type: 3}
+  cooldown: 10
   durationInSeconds: 15
   range: 5
   areaOfEffect: 1

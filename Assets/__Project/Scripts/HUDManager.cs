@@ -49,7 +49,7 @@ public class HUDManager : MonoBehaviour
         foreach (var item in playerInventory.Items)
         {
             ItemUI itemUI = Instantiate(itemSlotPrefab, invetoryBar.transform).GetComponent<ItemUI>();
-            itemUI.ItemIcon.sprite = item.icon;
+            itemUI.ItemIcon.sprite = item.ItemScriptableObject.icon;
         }
     }
 

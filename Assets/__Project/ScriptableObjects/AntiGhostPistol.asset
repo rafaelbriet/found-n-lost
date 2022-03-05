@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AntiGhostPistol
   m_EditorClassIdentifier: 
   icon: {fileID: 6794798954640236817, guid: 1aa9b8cf29e78fa44b6c4b4602a5a967, type: 3}
+  cooldown: 0.5
   damageAmount: 10
   range: 5
   layerMask:

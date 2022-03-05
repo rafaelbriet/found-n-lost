@@ -27,6 +27,8 @@ public class WarehouseManager : MonoBehaviour
     private float timeBetweenGhostSpawnDecreasesBy = 1f;
     [SerializeField]
     private Pathfinder pathfinder;
+    [SerializeField]
+    private List<ItemScriptableObject> items;
 
     private GameObject[] playerSpawnPoints;
     private GameObject[] ghostSpawnPoints;
@@ -50,6 +52,27 @@ public class WarehouseManager : MonoBehaviour
 
         player.GetComponent<Character>().Died += OnPlayerDied;
         player.SetActive(false);
+        GivePlayerStarterItems();
+    }
+
+    private void GivePlayerStarterItems()
+    {
+        Inventory playerInventory = player.GetComponent<Inventory>();
+
+        foreach (ItemScriptableObject item in items)
+        {
+            playerInventory.AddItem(new Item(item));
+        }
+    }
+
+    private void ResetPlayerItemsCooldown()
+    {
+        Inventory playerInventory = player.GetComponent<Inventory>();
+
+        foreach (Item item in playerInventory.Items)
+        {
+            item.ResetCooldown();
+        }
     }
 
     private void OnPlayerDied(object sender, System.EventArgs e)
@@ -76,6 +99,7 @@ public class WarehouseManager : MonoBehaviour
 
         player.SetActive(true);
         SetPlayerPosition();
+        ResetPlayerItemsCooldown();
 
         StartCoroutine(GhostTimer());
         StartCoroutine(GameTimer());

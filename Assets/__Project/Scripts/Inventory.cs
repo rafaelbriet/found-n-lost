@@ -5,14 +5,26 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]
-    private List<ItemScriptableObject> items;
+    private List<Item> items = new List<Item>();
 
-    public ItemScriptableObject SelectedItem { get; private set; }
+    public Item SelectedItem { get; private set; }
     public int SelectedItemIndex { get; private set; }
-    public IReadOnlyCollection<ItemScriptableObject> Items { get => items.AsReadOnly(); }
+    public IReadOnlyCollection<Item> Items { get => items.AsReadOnly(); }
 
     public event EventHandler SelectedItemChanged;
+
+    private void Update()
+    {
+        foreach (Item item in items)
+        {
+            item.UpdateCooldownTimer(Time.deltaTime);
+        }
+    }
+
+    public void AddItem(Item item)
+    {
+        items.Add(item);
+    }
 
     public void SelectItem(int index)
     {

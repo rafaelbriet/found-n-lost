@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: MedPack
   m_EditorClassIdentifier: 
   icon: {fileID: 305403410842754464, guid: c5e3ebfec7790774bae11567b343416e, type: 3}
+  cooldown: 10
   healAmount: 10

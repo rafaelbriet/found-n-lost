@@ -6124,6 +6124,10 @@ MonoBehaviour:
   minTimeBetweenGhostSpawn: 5
   timeBetweenGhostSpawnDecreasesBy: 1
   pathfinder: {fileID: 14916467}
+  items:
+  - {fileID: 11400000, guid: 1c9b5e91359b4e84a81cdccb3e8a4c1e, type: 2}
+  - {fileID: 11400000, guid: c38ad86b0a7759e41bc0fe642b61dcd0, type: 2}
+  - {fileID: 11400000, guid: 454f1e103a6b0804b9bcd94ed849072f, type: 2}
 --- !u!4 &673584755
 Transform:
   m_ObjectHideFlags: 0
@@ -14115,10 +14119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2c55ebcaa1c8b44a6cc9a8181dcca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 1c9b5e91359b4e84a81cdccb3e8a4c1e, type: 2}
-  - {fileID: 11400000, guid: c38ad86b0a7759e41bc0fe642b61dcd0, type: 2}
-  - {fileID: 11400000, guid: 454f1e103a6b0804b9bcd94ed849072f, type: 2}
 --- !u!1001 &2036638694
 PrefabInstance:
   m_ObjectHideFlags: 0
