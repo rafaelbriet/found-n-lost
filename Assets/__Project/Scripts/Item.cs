@@ -21,11 +21,9 @@ public class Item
     {
         if (CanUse == false)
         {
-            Debug.Log("Item cannot be used now");
             return;
         }
 
-        Debug.Log("Item can be used now");
         CanUse = false;
         ItemScriptableObject.Use(options);
         CooldownTimer.Reset();
