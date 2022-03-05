@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e41290305fc62145aa7c92b786a3db8, type: 3}
   m_Name: MedPack
   m_EditorClassIdentifier: 
-  icon: {fileID: 305403410842754464, guid: c5e3ebfec7790774bae11567b343416e, type: 3}
+  icon: {fileID: 8560991119325684831, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
   cooldown: 10
   healAmount: 10

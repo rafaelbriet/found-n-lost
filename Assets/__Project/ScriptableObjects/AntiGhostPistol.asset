@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ef57b2064d42e429ae5f59d7141ca2, type: 3}
   m_Name: AntiGhostPistol
   m_EditorClassIdentifier: 
-  icon: {fileID: 6794798954640236817, guid: 1aa9b8cf29e78fa44b6c4b4602a5a967, type: 3}
+  icon: {fileID: 7143958302985762968, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
   cooldown: 0.5
   damageAmount: 10
   range: 5
