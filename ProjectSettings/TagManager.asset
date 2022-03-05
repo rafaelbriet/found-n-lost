@@ -52,9 +52,9 @@ TagManager:
   - name: Level Wall
     uniqueID: 2924057981
     locked: 0
-  - name: Level Decoration
-    uniqueID: 795558349
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Level Decoration
+    uniqueID: 795558349
     locked: 0
