@@ -68,6 +68,11 @@ public class PlayerController : MonoBehaviour
         CameraFollow();
     }
 
+    private void OnDisable()
+    {
+        direction = Vector2.zero;
+    }
+
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
