@@ -1,21 +1,20 @@
 ﻿public class Timer
 {
-    private float duration;
-    private float timeLeft;
-
     public Timer(float duration)
     {
-        this.duration = duration;
-        timeLeft = duration;
+        Duration = duration;
+        TimeLeft = duration;
     }
 
     public bool HasFinished { get; private set; }
+    public float Duration { get; private set; }
+    public float TimeLeft { get; private set; }
 
     public void Tick(float elapsed)
     {
-        timeLeft -= elapsed;
+        TimeLeft -= elapsed;
 
-        if (timeLeft <= 0)
+        if (TimeLeft <= 0)
         {
             HasFinished = true;
         }
@@ -23,19 +22,19 @@
 
     public void Reset()
     {
-        timeLeft = duration;
+        TimeLeft = Duration;
         HasFinished = false;
     }
 
     public void SetDuration(float duration)
     {
-        this.duration = duration;
+        Duration = duration;
     }
 
     public string PrintTimeLeftInMinutes()
     {
-        float minutes = timeLeft / 60f;
-        float seconds = timeLeft % 60f;
+        float minutes = TimeLeft / 60f;
+        float seconds = TimeLeft % 60f;
 
         return $"{(int)minutes:00}:{seconds:00}";
     }

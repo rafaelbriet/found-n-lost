@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Item
         CooldownTimer = new Timer(ItemScriptableObject.cooldown);
     }
 
+    public event EventHandler ItemUsed;
+
     public void Use(ItemUseOptions options)
     {
         if (CanUse == false)
@@ -25,6 +28,8 @@ public class Item
         Debug.Log("Item can be used now");
         CanUse = false;
         ItemScriptableObject.Use(options);
+        CooldownTimer.Reset();
+        ItemUsed?.Invoke(this, EventArgs.Empty);
     }
 
     public void UpdateCooldownTimer(float elapsed)
