@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class WarehouseManager : MonoBehaviour
@@ -29,6 +30,8 @@ public class WarehouseManager : MonoBehaviour
     private Pathfinder pathfinder;
     [SerializeField]
     private List<ItemScriptableObject> items;
+    [SerializeField]
+    private GameReport gameReport;
 
     private GameObject[] playerSpawnPoints;
     private GameObject[] ghostSpawnPoints;
@@ -124,6 +127,10 @@ public class WarehouseManager : MonoBehaviour
         Debug.Log($"After fight so many ghosts for {CurrentNight} nights, you decided to quit this job...");
 
         Destroy(player);
+
+        gameReport.TotalNightsWorked = CurrentNight;
+
+        SceneManager.LoadScene("GameOver");
     }
 
     private void SpawnGhost()
