@@ -21,10 +21,6 @@ public class HUDManager : MonoBehaviour
     private GameObject itemSlotPrefab;
     [SerializeField]
     private GameObject invetoryBar;
-    [SerializeField]
-    private Color selectedItemColor;
-    [SerializeField]
-    private Color normalItemColor;
 
     private void Awake()
     {
@@ -63,10 +59,10 @@ public class HUDManager : MonoBehaviour
         foreach (Transform item in invetoryBar.transform)
         {
             ItemUI itemUI = item.GetComponent<ItemUI>();
-            itemUI.SlotBackground.color = normalItemColor;
+            itemUI.Unselect();
         }
 
-        invetoryBar.transform.GetChild(playerInventory.SelectedItemIndex).GetComponent<ItemUI>().SlotBackground.color = selectedItemColor;
+        invetoryBar.transform.GetChild(playerInventory.SelectedItemIndex).GetComponent<ItemUI>().Select();
     }
 
     private void UpdateClockDisplay()

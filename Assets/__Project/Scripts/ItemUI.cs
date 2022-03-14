@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class ItemUI : MonoBehaviour
 {
     [SerializeField]
@@ -11,11 +12,21 @@ public class ItemUI : MonoBehaviour
     private Image itemIcon;
     [SerializeField]
     private Slider slider;
+    [SerializeField]
+    private Sprite selectedSprite;
+    [SerializeField]
+    private Sprite normalSprite;
 
     private Item item;
+    private Image image;
     
     public Image ItemIcon { get => itemIcon; set => itemIcon = value; }
     public Image SlotBackground { get => slotBackground; set => slotBackground = value; }
+
+    private void Awake()
+    {
+        image = GetComponent<Image>();
+    }
 
     public void Config(Item item)
     {
@@ -24,6 +35,16 @@ public class ItemUI : MonoBehaviour
         this.item.ItemUsed += OnItemUsed;
 
         ItemIcon.sprite = this.item.ItemScriptableObject.icon;
+    }
+
+    public void Select()
+    {
+        image.sprite = selectedSprite;
+    }
+
+    public void Unselect()
+    {
+        image.sprite = normalSprite;
     }
 
     private void OnItemUsed(object sender, System.EventArgs e)
