@@ -19,7 +19,7 @@ TextureImporter:
     second: UI_HitPoints_Border
   - first:
       213: 8160775752198118580
-    second: "UI_Pause_Clip\xB4"
+    second: UI_Pause_Clip
   - first:
       213: 7448113381798972013
     second: UI_Pause_Board
@@ -229,7 +229,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "UI_Pause_Clip\xB4"
+      name: UI_Pause_Clip
       rect:
         serializedVersion: 2
         x: 32

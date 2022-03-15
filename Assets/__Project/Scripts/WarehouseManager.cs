@@ -37,12 +37,17 @@ public class WarehouseManager : MonoBehaviour
     private GameObject[] ghostSpawnPoints;
     private Timer ghostSpawnTimer;
     private List<GameObject> ghosts = new List<GameObject>();
+    private WarehouseState currentState;
 
     public Timer Timer { get; private set; }
     public int CurrentNight { get; private set; }
 
     public event EventHandler NightStarted;
     public event EventHandler NightEnded;
+    public event EventHandler Paused;
+    public event EventHandler Unpaused;
+
+    private enum WarehouseState { Playing, Paused }
 
     private void Awake()
     {
@@ -56,6 +61,29 @@ public class WarehouseManager : MonoBehaviour
         player.GetComponent<Character>().Died += OnPlayerDied;
         player.SetActive(false);
         GivePlayerStarterItems();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+
+        currentState = WarehouseState.Paused;
+
+        Paused?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+
+        currentState = WarehouseState.Playing;
+
+        Unpaused?.Invoke(this, EventArgs.Empty);
+    }
+
+    public bool IsGamePaused()
+    {
+        return currentState == WarehouseState.Paused;
     }
 
     private void GivePlayerStarterItems()

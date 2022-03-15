@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    [Header("Others")]
+    [SerializeField]
+    private WarehouseManager warehouseManager;
+
     private Vector2 direction;
     private Vector2 mousePosition;
     private new Rigidbody2D rigidbody2D;
@@ -90,6 +94,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnUseItem()
     {
+        if (warehouseManager.IsGamePaused())
+        {
+            return;
+        }
+
         if (inventory.SelectedItem == null)
         {
             return;
@@ -100,8 +109,25 @@ public class PlayerController : MonoBehaviour
 
     public void OnSelectItem(InputValue value)
     {
+        if (warehouseManager.IsGamePaused())
+        {
+            return;
+        }
+
         int index = (int)value.Get<float>() - 1;
         inventory.SelectItem(index);
+    }
+
+    public void OnPause()
+    {
+        if (warehouseManager.IsGamePaused())
+        {
+            warehouseManager.UnpauseGame();
+        }
+        else
+        {
+            warehouseManager.PauseGame();
+        }
     }
 
     private void CameraFollow()
