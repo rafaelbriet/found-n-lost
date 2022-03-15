@@ -13,11 +13,9 @@ public class AudioVolumeManager : MonoBehaviour
     [SerializeField]
     private AudioMixer audioMixer;
 
-    private void Awake()
+    private void Start()
     {
         musicVolumeSlide.value = gameSettings.MusicVolume;
-
-        ChangeMusicVolume(gameSettings.MusicVolume);
     }
 
     public void ChangeMusicVolume(float volume)

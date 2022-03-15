@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameSettings : ScriptableObject
 {
     [SerializeField]
-    [Range(0f, 1f)]
+    [Range(0.0001f, 1f)]
     private float musicVolume = 1f;
 
     public float MusicVolume { get => musicVolume; set => musicVolume = value; }
