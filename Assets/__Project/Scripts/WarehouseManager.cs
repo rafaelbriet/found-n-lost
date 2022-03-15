@@ -66,6 +66,8 @@ public class WarehouseManager : MonoBehaviour
         {
             playerInventory.AddItem(new Item(item));
         }
+
+        playerInventory.SelectItem(0);
     }
 
     private void ResetPlayerItemsCooldown()
