@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: e9642b65a7caf194caf6e3df48f0cf2f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Cloude Regular 1.0
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a20bf5608948f8942a5ed25cd1d226b2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
