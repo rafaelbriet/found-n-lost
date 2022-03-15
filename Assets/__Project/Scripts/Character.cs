@@ -23,6 +23,11 @@ public class Character : MonoBehaviour
         CurrentHitPoints = maxHitPoints;
     }
 
+    private void OnDisable()
+    {
+        HasSprayApplied = false;
+    }
+
     public void Damage(int amout)
     {
         CurrentHitPoints -= amout;
