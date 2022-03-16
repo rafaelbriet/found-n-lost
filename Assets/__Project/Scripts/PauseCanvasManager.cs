@@ -29,6 +29,11 @@ public class PauseCanvasManager : MonoBehaviour
         warehouseManager.Unpaused -= OnUnpaused;
     }
 
+    public void Unpause()
+    {
+        warehouseManager.UnpauseGame();
+    }
+
     private void OnUnpaused(object sender, System.EventArgs e)
     {
         HideCanvas();
