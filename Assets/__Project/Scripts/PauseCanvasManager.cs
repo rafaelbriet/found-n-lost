@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class PauseCanvasManager : MonoBehaviour
@@ -32,6 +33,12 @@ public class PauseCanvasManager : MonoBehaviour
     public void Unpause()
     {
         warehouseManager.UnpauseGame();
+    }
+
+    public void Restart()
+    {
+        warehouseManager.Restart();
+        SceneManager.LoadScene("Gameplay");
     }
 
     private void OnUnpaused(object sender, System.EventArgs e)

@@ -81,6 +81,11 @@ public class WarehouseManager : MonoBehaviour
         Unpaused?.Invoke(this, EventArgs.Empty);
     }
 
+    public void Restart()
+    {
+        Time.timeScale = 1;
+    }
+
     public bool IsGamePaused()
     {
         return currentState == WarehouseState.Paused;
