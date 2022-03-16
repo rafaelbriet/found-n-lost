@@ -40,6 +40,11 @@ public class PauseCanvasManager : MonoBehaviour
         SceneManager.LoadScene("Gameplay");
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void OnUnpaused(object sender, System.EventArgs e)
     {
         HideCanvas();
