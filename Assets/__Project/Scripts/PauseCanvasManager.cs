@@ -37,7 +37,6 @@ public class PauseCanvasManager : MonoBehaviour
 
     public void Restart()
     {
-        warehouseManager.Restart();
         SceneManager.LoadScene("Gameplay");
     }
 

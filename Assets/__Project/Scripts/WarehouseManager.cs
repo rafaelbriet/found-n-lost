@@ -63,6 +63,11 @@ public class WarehouseManager : MonoBehaviour
         GivePlayerStarterItems();
     }
 
+    private void OnDestroy()
+    {
+        Restart();
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
