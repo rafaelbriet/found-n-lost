@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Animator animator;
     [SerializeField]
+    private Animator effectsAnimator;
+    [SerializeField]
     private SpriteRenderer spriteRenderer;
 
     [Header("Others")]
@@ -31,11 +33,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 mousePosition;
     private new Rigidbody2D rigidbody2D;
     private Inventory inventory;
+    private ItemUseOptions itemUseOptions;
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
+
+        itemUseOptions = new ItemUseOptions { Owner = gameObject, Camera = camera, Animator = effectsAnimator};
     }
 
     private void FixedUpdate()
@@ -104,7 +109,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        inventory.SelectedItem.Use(new ItemUseOptions { Owner = gameObject, Camera = camera, MousePosition = mousePosition });
+        itemUseOptions.MousePosition = mousePosition;
+
+        inventory.SelectedItem.Use(itemUseOptions);
     }
 
     public void OnSelectItem(InputValue value)

@@ -4891,10 +4891,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7684541935217448073, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7684541935217448073, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 854724839}
@@ -4902,10 +4898,6 @@ PrefabInstance:
       propertyPath: cameraHolder
       value: 
       objectReference: {fileID: 854724838}
-    - target: {fileID: 7684541935217448073, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
-      propertyPath: selectedItem
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c9b5e91359b4e84a81cdccb3e8a4c1e, type: 2}
     - target: {fileID: 7684541935217448073, guid: 7860e48cdf5726341a45c99ff5e88628, type: 3}
       propertyPath: warehouseManager
       value: 

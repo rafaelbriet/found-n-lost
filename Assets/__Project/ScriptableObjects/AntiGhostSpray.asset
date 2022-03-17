@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: -5789981893102897468, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
   cooldown: 15
-  durationInSeconds: 10
+  duration: 10
   range: 5
   areaOfEffect: 1
   layerMask:

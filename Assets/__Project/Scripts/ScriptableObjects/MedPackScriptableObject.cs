@@ -11,5 +11,6 @@ public class MedPackScriptableObject : ItemScriptableObject
     public override void Use(ItemUseOptions options)
     {
         options.Owner.GetComponent<Character>().Heal(healAmount);
+        options.Animator.Play("Base Layer.ItensEffects_MedPack");
     }
 }

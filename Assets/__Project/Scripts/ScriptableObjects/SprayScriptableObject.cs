@@ -6,8 +6,6 @@ using UnityEngine;
 public class SprayScriptableObject : ItemScriptableObject
 {
     [SerializeField]
-    private float durationInSeconds = 15f;
-    [SerializeField]
     private float range = 5f;
     [SerializeField]
     private float areaOfEffect = 1f;
@@ -24,8 +22,22 @@ public class SprayScriptableObject : ItemScriptableObject
         {
             if (Vector3.Distance(options.Owner.transform.position, collider.transform.position) < range)
             {
-                collider.GetComponent<Character>().ApplySpray(durationInSeconds);
+                collider.GetComponent<Character>().ApplySpray(duration);
             }
         }
+
+        options.Animator.SetBool("IsSprayActive", true);
+        options.Animator.Play("Base Layer.ItensEffects_Spray");
+    }
+
+    public override void ResetAnimation(ItemUseOptions options)
+    {
+        if (options == null)
+        {
+            return;
+        }
+
+        options.Animator.SetBool("IsSprayActive", false);
+        options.Animator.GetComponent<SpriteRenderer>().sprite = null;
     }
 }
