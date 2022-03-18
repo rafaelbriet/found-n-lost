@@ -43,32 +43,44 @@ public class PlayerController : MonoBehaviour
         itemUseOptions = new ItemUseOptions { Owner = gameObject, Camera = camera, Animator = effectsAnimator};
     }
 
+    private void OnEnable()
+    {
+        SetPistolAnimation();
+    }
+
     private void FixedUpdate()
     {
         Vector3 newPosition = (speed * Time.deltaTime * direction) + new Vector2(transform.position.x, transform.position.y);
         rigidbody2D.MovePosition(newPosition);
 
+        string animationName = "";
+
+        if (animator.GetBool("IsUsingPistol"))
+        {
+            animationName = "_Pistol";
+        }
+
         if (direction.x > 0)
         {
-            animator.Play("Base Layer.Player_Run_Side");
+            animator.Play($"Base Layer.Player{animationName}_Run_Side");
             spriteRenderer.flipX = true;
         }
         else if (direction.x < 0)
         {
-            animator.Play("Base Layer.Player_Run_Side");
+            animator.Play($"Base Layer.Player{animationName}_Run_Side");
             spriteRenderer.flipX = false;
         }
         else if (direction.y < 0)
         {
-            animator.Play("Base Layer.Player_Run_Front");
+            animator.Play($"Base Layer.Player{animationName}_Run_Front");
         }
         else if (direction.y > 0)
         {
-            animator.Play("Base Layer.Player_Run_Back");
+            animator.Play($"Base Layer.Player{animationName}_Run_Back");
         }
         else
         {
-            animator.Play("Base Layer.Player_Idle_Front");
+            animator.Play($"Base Layer.Player{animationName}_Idle_Front");
         }
     }
 
@@ -123,6 +135,8 @@ public class PlayerController : MonoBehaviour
 
         int index = (int)value.Get<float>() - 1;
         inventory.SelectItem(index);
+
+        SetPistolAnimation();
     }
 
     public void OnPause()
@@ -134,6 +148,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             warehouseManager.PauseGame();
+        }
+    }
+
+    private void SetPistolAnimation()
+    {
+        if (inventory.SelectedItem?.ItemScriptableObject as PistolScriptableObject)
+        {
+            animator.SetBool("IsUsingPistol", true);
+        }
+        else
+        {
+            animator.SetBool("IsUsingPistol", false);
         }
     }
 
