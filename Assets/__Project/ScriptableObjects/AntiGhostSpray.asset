@@ -15,6 +15,8 @@ MonoBehaviour:
   icon: {fileID: -5789981893102897468, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
   cooldown: 15
   duration: 10
+  readyAudioClip: {fileID: 0}
+  useAudioClip: {fileID: 8300000, guid: 8f9efe83606c9d94ab48004df7dfd317, type: 3}
   range: 5
   areaOfEffect: 1
   layerMask:

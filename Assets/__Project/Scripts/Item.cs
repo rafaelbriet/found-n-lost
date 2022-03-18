@@ -30,6 +30,11 @@ public class Item
 
         this.options = options;
 
+        if (ItemScriptableObject.useAudioClip != null)
+        {
+            options.PlayerSFXManager.PlayOneShot(ItemScriptableObject.useAudioClip);
+        }
+
         CanUse = false;
         ItemScriptableObject.Use(options);
         CooldownTimer.Reset();
@@ -56,6 +61,11 @@ public class Item
     public void ResetCooldown()
     {
         ItemScriptableObject.ResetAnimation(options);
+
+        if (CanUse == false && ItemScriptableObject.readyAudioClip != null)
+        {
+            options?.PlayerSFXManager.PlayOneShot(ItemScriptableObject.readyAudioClip);
+        }
 
         CanUse = true;
         CooldownTimer.Reset();

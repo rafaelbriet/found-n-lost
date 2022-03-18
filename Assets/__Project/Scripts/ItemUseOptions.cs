@@ -6,4 +6,5 @@ public class ItemUseOptions
     public Camera Camera { get; set; }
     public Vector3 MousePosition { get; set; }
     public Animator Animator { get; set; }
+    public PlayerSFXManager PlayerSFXManager { get; set; }
 }

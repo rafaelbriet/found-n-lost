@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7143958302985762968, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
   cooldown: 0.5
+  duration: 0
+  readyAudioClip: {fileID: 8300000, guid: 8c324960b055b024280f9bacc25ee9f9, type: 3}
+  useAudioClip: {fileID: 8300000, guid: c93cf207119ae3a41b2012971c8dae45, type: 3}
   damageAmount: 10
   range: 5
   layerMask:

@@ -34,13 +34,15 @@ public class PlayerController : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
     private Inventory inventory;
     private ItemUseOptions itemUseOptions;
+    private PlayerSFXManager sfxManager;
 
     private void Awake()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         inventory = GetComponent<Inventory>();
+        sfxManager = GetComponent<PlayerSFXManager>();
 
-        itemUseOptions = new ItemUseOptions { Owner = gameObject, Camera = camera, Animator = effectsAnimator};
+        itemUseOptions = new ItemUseOptions { Owner = gameObject, Camera = camera, Animator = effectsAnimator, PlayerSFXManager = sfxManager };
     }
 
     private void OnEnable()
