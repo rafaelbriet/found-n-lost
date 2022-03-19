@@ -19,6 +19,9 @@ public class AudioVolumeManager : MonoBehaviour
     {
         musicVolumeSlide.value = gameSettings.MusicVolume;
         sfxVolumeSlide.value = gameSettings.SfxVolume;
+
+        ChangeMusicVolume(gameSettings.MusicVolume);
+        ChangeSfxVolume(gameSettings.SfxVolume);
     }
 
     public void ChangeMusicVolume(float volume)
