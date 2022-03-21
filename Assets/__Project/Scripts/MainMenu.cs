@@ -7,10 +7,13 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField]
     private GameObject creditsCanvas;
+    [SerializeField]
+    private GameObject howToPlayCanvas;
 
     private void Awake()
     {
         creditsCanvas.SetActive(false);
+        howToPlayCanvas.SetActive(false);
     }
 
     public void Play()
@@ -21,5 +24,10 @@ public class MainMenu : MonoBehaviour
     public void ToggleCreditsCanvas()
     {
         creditsCanvas.SetActive(!creditsCanvas.activeInHierarchy);
+    }
+
+    public void ToggleHowToPlayCanvas()
+    {
+        howToPlayCanvas.SetActive(!howToPlayCanvas.activeInHierarchy);
     }
 }
