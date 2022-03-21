@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
 
     private void Awake()
     {
-        message.text = $"After fight so many ghosts for {gameReport.TotalNightsWorked} {PluralizeNight()}, you decided to quit this job...";
+        message.text = $"After fighting so many ghosts for {gameReport.TotalNightsWorked} {PluralizeNight()}, you decided to quit this job...";
     }
 
     private string PluralizeNight()
