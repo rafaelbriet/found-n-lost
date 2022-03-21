@@ -14,17 +14,7 @@ public class SprayScriptableObject : ItemScriptableObject
 
     public override void Use(ItemUseOptions options)
     {
-        Vector3 mouseWorldPosition = options.Camera.ScreenToWorldPoint(options.MousePosition);
-        
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(mouseWorldPosition, areaOfEffect, layerMask);
-
-        foreach (Collider2D collider in colliders)
-        {
-            if (Vector3.Distance(options.Owner.transform.position, collider.transform.position) < range)
-            {
-                collider.GetComponent<Character>().ApplySpray(duration);
-            }
-        }
+        options.Owner.GetComponent<Character>().ApplySpray(duration);
 
         options.Animator.SetBool("IsSprayActive", true);
         options.Animator.Play("Base Layer.ItensEffects_Spray");
