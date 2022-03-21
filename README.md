@@ -15,7 +15,6 @@
 - [Moaning of the Dead, A.wav by InspectorJ](https://freesound.org/people/InspectorJ/sounds/413150/)
 - [Running Loud by dersuperanton](https://freesound.org/people/dersuperanton/sounds/435853/)
 - [Spray by Soundkrampf](https://freesound.org/people/Soundkrampf/sounds/414025/)
-- [Pick-up Health by juancamiloorjuela](
 - [Perfume Spray by redafs](https://freesound.org/people/redafs/sounds/380337/)
 - [Scifi Laser Gun Firing by TannerSound](https://freesound.org/people/TannerSound/sounds/495054/)
 - [ScifiHeavyBlasterShot.wav by SuperPhat](https://freesound.org/people/SuperPhat/sounds/531861/)
