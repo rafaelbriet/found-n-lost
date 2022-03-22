@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 1658041952710792739}
   - component: {fileID: 4628026888460293985}
   - component: {fileID: 5351061953690528155}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 1858623668389186781}
   - component: {fileID: 993613402511562470}
   - component: {fileID: 5515923552405232663}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: HitPointsImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 89552475400991459}
   - component: {fileID: 427588251309379532}
   - component: {fileID: 8120113944292233257}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: HitPointsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

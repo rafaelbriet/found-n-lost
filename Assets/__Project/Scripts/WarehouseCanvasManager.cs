@@ -8,6 +8,8 @@ public class WarehouseCanvasManager : MonoBehaviour
     [Header("General")]
     [SerializeField]
     private WarehouseManager warehouseManager;
+    [SerializeField]
+    private GameReport gameReport;
     [Header("Start of the night")]
     [SerializeField]
     private CanvasGroup startOfTheNightCanvasGroup;
@@ -18,6 +20,8 @@ public class WarehouseCanvasManager : MonoBehaviour
     private CanvasGroup endOfTheNightCanvasGroup;
     [SerializeField]
     private TextMeshProUGUI message;
+    [SerializeField]
+    private TextMeshProUGUI totalScore;
 
     private void Awake()
     {
@@ -28,13 +32,11 @@ public class WarehouseCanvasManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //warehouseManager.NightStarted += OnNightStarted;
         warehouseManager.NightEnded += OnNightEnded;
     }
 
     private void OnDisable()
     {
-        //warehouseManager.NightStarted -= OnNightStarted;
         warehouseManager.NightEnded -= OnNightEnded;
     }
 
@@ -48,7 +50,16 @@ public class WarehouseCanvasManager : MonoBehaviour
     {
         ShowCanvasGroup(endOfTheNightCanvasGroup);
 
-        message.text = $"Another night of work is over. You're working for {warehouseManager.CurrentNight} nights...";
+        message.text = $"Another night of work is over. " +
+            $"You're working for {warehouseManager.CurrentNight} {Pluralize(warehouseManager.CurrentNight, "night", "nights")} " +
+            $"and killed {gameReport.GhostsKilled} {Pluralize(gameReport.GhostsKilled, "ghost", "ghosts")}";
+
+        totalScore.text = gameReport.TotalScore().ToString();
+    }
+
+    private string Pluralize(int amount, string singular, string plural)
+    {
+        return amount > 1 ? plural : singular;
     }
 
     private IEnumerator StartOfTheNightIntroCoroutine()

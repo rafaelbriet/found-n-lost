@@ -136,7 +136,7 @@ public class Ghost : NPC
 
     public void DoDie()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Attack()

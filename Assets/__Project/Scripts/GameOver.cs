@@ -10,15 +10,20 @@ public class GameOver : MonoBehaviour
     private GameReport gameReport;
     [SerializeField]
     private TextMeshProUGUI message;
+    [SerializeField]
+    private TextMeshProUGUI totalScore;
 
     private void Awake()
     {
-        message.text = $"After fighting so many ghosts for {gameReport.TotalNightsWorked} {PluralizeNight()}, you decided to quit this job...";
+        message.text = $"After fighting and killing {gameReport.GhostsKilled} {Pluralize(gameReport.GhostsKilled, "ghost", "ghosts")} during " +
+            $"{gameReport.TotalNightsWorked} {Pluralize(gameReport.TotalNightsWorked, "night", "nights")}, you decided to quit this job.";
+
+        totalScore.text = gameReport.TotalScore().ToString();
     }
 
-    private string PluralizeNight()
+    private string Pluralize(int amount, string singular, string plural)
     {
-        return gameReport.TotalNightsWorked > 1 ? "nights" : "night";
+        return amount > 1 ? plural : singular;
     }
 
     public void PlayAgain()

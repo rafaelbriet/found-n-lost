@@ -38,6 +38,7 @@ public class WarehouseManager : MonoBehaviour
     private Timer ghostSpawnTimer;
     private List<GameObject> ghosts = new List<GameObject>();
     private WarehouseState currentState;
+    private int ghostsKilled;
 
     public Timer Timer { get; private set; }
     public int CurrentNight { get; private set; }
@@ -169,6 +170,7 @@ public class WarehouseManager : MonoBehaviour
         Destroy(player);
 
         gameReport.TotalNightsWorked = CurrentNight;
+        gameReport.GhostsKilled = ghostsKilled;
 
         SceneManager.LoadScene("GameOver");
     }
@@ -181,6 +183,8 @@ public class WarehouseManager : MonoBehaviour
         Ghost ghost = ghostGO.GetComponent<Ghost>();
         ghost.Init(pathfinder);
 
+        ghost.GetComponent<Character>().Died += OnGhostDied;
+
         if (CurrentNight > 1)
         {
             ghost.IncreaseSearchRadius(CurrentNight - 1);
@@ -188,10 +192,16 @@ public class WarehouseManager : MonoBehaviour
         }
     }
 
+    private void OnGhostDied(object sender, EventArgs e)
+    {
+        ghostsKilled++;
+    }
+
     private void RemoveAllGhosts()
     {
         foreach (GameObject ghost in ghosts)
         {
+            ghost.GetComponent<Character>().Died -= OnGhostDied;
             Destroy(ghost);
         }
 
@@ -203,6 +213,9 @@ public class WarehouseManager : MonoBehaviour
         Debug.Log($"Another night of work is over. You're working for {CurrentNight} nights...");
 
         RemoveAllGhosts();
+
+        gameReport.TotalNightsWorked = CurrentNight;
+        gameReport.GhostsKilled = ghostsKilled;
 
         NightEnded?.Invoke(this, EventArgs.Empty);
 
