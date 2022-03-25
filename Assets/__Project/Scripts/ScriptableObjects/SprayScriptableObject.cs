@@ -5,13 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewSpray", menuName = "Itens/Spray")]
 public class SprayScriptableObject : ItemScriptableObject
 {
-    [SerializeField]
-    private float range = 5f;
-    [SerializeField]
-    private float areaOfEffect = 1f;
-    [SerializeField]
-    private LayerMask layerMask;
-
     public override void Use(ItemUseOptions options)
     {
         options.Owner.GetComponent<Character>().ApplySpray(duration);
