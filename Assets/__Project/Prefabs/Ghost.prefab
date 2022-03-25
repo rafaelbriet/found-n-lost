@@ -560,7 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee77e664549b6d43b9dbd0e136d34ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 100
+  maxHitPoints: 50
 --- !u!1 &8189913463945179290
 GameObject:
   m_ObjectHideFlags: 0

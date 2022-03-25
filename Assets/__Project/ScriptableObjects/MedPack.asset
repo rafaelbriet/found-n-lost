@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MedPack
   m_EditorClassIdentifier: 
   icon: {fileID: 8560991119325684831, guid: 77ce16bba4640cd46a2e3ece8668dc98, type: 3}
-  cooldown: 10
+  cooldown: 30
   duration: 0
   readyAudioClip: {fileID: 0}
   useAudioClip: {fileID: 8300000, guid: d2e6e968cd536b049b239ad43fd52015, type: 3}

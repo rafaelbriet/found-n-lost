@@ -5149,7 +5149,7 @@ MonoBehaviour:
   player: {fileID: 2032695713}
   ghostPrefab: {fileID: 8189913463890121813, guid: b0cb4e1a9dcb97740b7e798be6ab16e3, type: 3}
   maxTimeBetweenGhostSpawn: 10
-  minTimeBetweenGhostSpawn: 5
+  minTimeBetweenGhostSpawn: 4
   timeBetweenGhostSpawnDecreasesBy: 1
   pathfinder: {fileID: 14916467}
   items:
