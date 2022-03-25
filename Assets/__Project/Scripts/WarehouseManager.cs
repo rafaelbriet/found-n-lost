@@ -177,18 +177,23 @@ public class WarehouseManager : MonoBehaviour
 
     private void SpawnGhost()
     {
-        GameObject ghostGO = Instantiate(ghostPrefab, GetRandomGhostSpawnPoint().transform.position, Quaternion.identity);
-        ghosts.Add(ghostGO);
+        int maxGhostSpawn = CurrentNight < ghostSpawnPoints.Length ? CurrentNight : ghostSpawnPoints.Length;
 
-        Ghost ghost = ghostGO.GetComponent<Ghost>();
-        ghost.Init(pathfinder);
-
-        ghost.GetComponent<Character>().Died += OnGhostDied;
-
-        if (CurrentNight > 1)
+        for (int i = 1; i <= maxGhostSpawn; i++)
         {
-            ghost.IncreaseSearchRadius(CurrentNight - 1);
-            ghost.IncreaseAttackDamage(CurrentNight - 1);
+            GameObject ghostGO = Instantiate(ghostPrefab, GetRandomGhostSpawnPoint().transform.position, Quaternion.identity);
+            ghosts.Add(ghostGO);
+
+            Ghost ghost = ghostGO.GetComponent<Ghost>();
+            ghost.Init(pathfinder);
+
+            ghost.GetComponent<Character>().Died += OnGhostDied;
+
+            if (CurrentNight > 1)
+            {
+                ghost.IncreaseSearchRadius(CurrentNight - 1);
+                ghost.IncreaseAttackDamage(CurrentNight - 1);
+            } 
         }
     }
 
