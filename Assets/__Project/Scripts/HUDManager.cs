@@ -12,7 +12,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private Inventory playerInventory;
     [SerializeField]
-    private Slider hitPointsSlider;
+    private Image hitPointsFill;
     [SerializeField]
     private WarehouseManager warehouseManager;
     [SerializeField]
@@ -32,7 +32,7 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateHitPointsDisplay();
+        hitPointsFill.fillAmount = 1f;
     }
 
     private void Update()
@@ -79,6 +79,6 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateHitPointsDisplay()
     {
-        hitPointsSlider.value = (float)playerCharacter.CurrentHitPoints / (float)playerCharacter.MaxHitPoints;
+        hitPointsFill.fillAmount = (float)playerCharacter.CurrentHitPoints / playerCharacter.MaxHitPoints;
     }
 }
