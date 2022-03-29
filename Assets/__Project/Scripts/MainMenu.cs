@@ -30,4 +30,13 @@ public class MainMenu : MonoBehaviour
     {
         howToPlayCanvas.SetActive(!howToPlayCanvas.activeInHierarchy);
     }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        Debug.Log("Game quit.");
+#else
+        Application.Quit();
+#endif
+    }
 }
