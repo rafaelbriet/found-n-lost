@@ -22,19 +22,17 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private GameObject invetoryBar;
 
-    private bool isInventoryBarInitialized;
-
     private void Awake()
     {
         playerCharacter.Damaged += OnPlayerCharacterDamaged;
         playerCharacter.Healed += OnPlayerCharacterHealed;
         playerInventory.SelectedItemChanged += OnSelectedItemChanged;
+        playerInventory.ItemAdded += OnItemAdded;
     }
 
     private void Start()
     {
         UpdateHitPointsDisplay();
-        InitInventoryBar();
     }
 
     private void Update()
@@ -42,20 +40,10 @@ public class HUDManager : MonoBehaviour
         UpdateClockDisplay();
     }
 
-    private void InitInventoryBar()
+    private void OnItemAdded(object sender, ItemAddedEventArgs args)
     {
-        if (isInventoryBarInitialized)
-        {
-            return;
-        }
-
-        foreach (var item in playerInventory.Items)
-        {
-            ItemUI itemUI = Instantiate(itemSlotPrefab, invetoryBar.transform).GetComponent<ItemUI>();
-            itemUI.Config(item);
-        }
-
-        isInventoryBarInitialized = true;
+        ItemUI itemUI = Instantiate(itemSlotPrefab, invetoryBar.transform).GetComponent<ItemUI>();
+        itemUI.Config(args.Item);
     }
 
     private void OnSelectedItemChanged(object sender, System.EventArgs e)
@@ -65,11 +53,6 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateInventoryBar()
     {
-        if (isInventoryBarInitialized == false)
-        {
-            InitInventoryBar();
-        }
-
         foreach (Transform item in invetoryBar.transform)
         {
             ItemUI itemUI = item.GetComponent<ItemUI>();

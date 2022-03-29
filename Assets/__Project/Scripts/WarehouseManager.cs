@@ -61,6 +61,10 @@ public class WarehouseManager : MonoBehaviour
 
         player.GetComponent<Character>().Died += OnPlayerDied;
         player.SetActive(false);
+    }
+
+    private void Start()
+    {
         GivePlayerStarterItems();
     }
 

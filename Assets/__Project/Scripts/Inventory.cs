@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     public IReadOnlyCollection<Item> Items { get => items.AsReadOnly(); }
 
     public event EventHandler SelectedItemChanged;
+    public event EventHandler<ItemAddedEventArgs> ItemAdded;
 
     private void Update()
     {
@@ -24,6 +25,11 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item)
     {
         items.Add(item);
+
+        ItemAddedEventArgs args = new ItemAddedEventArgs();
+        args.Item = item;
+
+        ItemAdded?.Invoke(this, args);
     }
 
     public void SelectItem(int index)
@@ -38,4 +44,9 @@ public class Inventory : MonoBehaviour
 
         SelectedItemChanged?.Invoke(this, EventArgs.Empty);
     }
+}
+
+public class ItemAddedEventArgs : EventArgs
+{
+    public Item Item { get; set; }
 }
